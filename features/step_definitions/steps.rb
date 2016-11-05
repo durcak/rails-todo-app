@@ -31,7 +31,6 @@ Then(/^I should not see "([^"]*)" inside the "([^"]*)"$/) do |expected, table_se
   expect(table).not_to have_content(expected)
 end
 
-
 When(/^I fill "([^"]*)" inside "([^"]*)"$/) do |value, input|
   fill_in(input, with: value)
 end
@@ -47,7 +46,7 @@ end
 Then(/^I should be on list "([^"]*)" detail page$/) do |list_name|
   h2 = page.first('h2')
   expect(h2).to have_content(list_name)
-  expect(page.current_path =~ /\/lists\/\d+/).to be(0)
+  expect(page.current_path =~ %r{\/lists\/\d+}).to be(0)
 end
 
 When(/^I am on list "([^"]*)" edit page$/) do |id|
@@ -55,7 +54,7 @@ When(/^I am on list "([^"]*)" edit page$/) do |id|
 end
 
 When(/^I pry$/) do
-  binding.pry
+  binding.pry # rubocop:disable Lint/Debugger
 end
 
 When(/^I delete "([^"]*)"$/) do |name|
@@ -129,7 +128,7 @@ end
 
 Then(/^I should be on new list "([^"]*)" task page$/) do |arg1|
   expect(page).to have_content('New Task')
-  expect(page.current_path =~ /\/lists\/#{arg1}\/tasks/).to be(0)
+  expect(page.current_path =~ %r{\/lists\/#{arg1}\/tasks}).to be(0)
 end
 
 When(/^I remove "([^"]*)"$/) do |arg1|
