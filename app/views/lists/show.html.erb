@@ -1,0 +1,29 @@
+<div class="row text-center">
+  <h2><%= @list.name %></h2>
+  <p><%= @list.description %></p>
+</div>
+
+<%= link_to "New Task", new_list_task_path(@list), class: 'btn btn-success' %>
+<% if action_name == 'show' %>
+<%= link_to "View completed tasks", completed_list_path(@list), class: 'btn btn-default' %>
+<% else %>
+  <%= link_to "View tasks", @list, class: 'btn btn-default' %>
+<% end %>
+
+<table id="tasks_table" class="table">
+  <tr>
+    <th>Task</th>
+    <th colspan="2"></th>
+  </tr>
+  <% (@completed_tasks || @list.tasks).each do |task| %>
+  <tr>
+    <td>
+      <%= task.name %>
+    </td>
+    <td><%= task.deleted? ? '' : link_to('Complete', complete_list_task_path(@list, task), method: :post, class: 'btn btn-warning')  %></td>
+    <td><%= link_to 'Remove', list_task_path(@list, task), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', lists_path %>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TodoApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h1>
+          My Awesome ToDo App
+        </h1>
+        <hr>
+        <% if notice %>
+          <div class="col-xs-12 alert alert-info">
+            <%= notice %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="well">
+      <%= yield %>
+    </div>
+  </div>
+  </body>
+</html>
