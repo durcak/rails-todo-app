@@ -27,20 +27,20 @@ class TasksController < ApplicationController
 
   def complete
     @task.update_attribute(:completed_at, Time.now)
-    redirect_to @list #, notice: "Task completed"
+    redirect_to @list # , notice: "Task completed"
   end
 
   private
 
   def set_list
-      @list = List.find(params[:list_id])
+    @list = List.find(params[:list_id])
   end
 
   def set_task
-      @task = @list.tasks.unscoped.find(params[:id])
+    @task = @list.tasks.unscoped.find(params[:id])
   end
 
   def task_params
-      params[:task].permit(:name, :priority)
+    params[:task].permit(:name, :priority)
   end
 end

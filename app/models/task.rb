@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   validates :list_id, :presence => true
   validates :priority, :presence => true, numericality: true
 
-  default_scope { where('completed_at IS NULL AND deleted_at IS NULL')  }
+  default_scope { where('completed_at IS NULL AND deleted_at IS NULL') }
   default_scope { order(priority: :asc) }
 
   scope :completed, -> { where('completed_at IS NOT NULL AND deleted_at IS NULL') }
@@ -13,20 +13,12 @@ class Task < ApplicationRecord
   scope :deleted, -> { where("deleted_at IS NOT NULL") }
   scope :important, -> { where('priority < 0') }
 
-  def completed? #vrati true aj je hotova
+  def completed?
     !completed_at.blank?
-    #completed_at.present?
   end
 
-  def deleted?  #vrati true ak je zmazana
+  def deleted?
     !completed_at.blank?
-    #!deleted_at.blank?
-    #deleted_at.present?
+    # !deleted_at.blank?
   end
-
-  def post_tasks(list_id)
-    with_exclusive_scope { find(all, :conditions => {:post_id => post_id}) }
-  end
-
-
 end
