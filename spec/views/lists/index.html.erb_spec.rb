@@ -2,15 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "lists/index", type: :view do
   before(:each) do
-    assign(:lists, [
-      List.create!(
-        :name => "Name",
-        :description => "MyText"
-      ),
-      List.create!(
-        :name => "Name",
-        :description => "MyText"
-      )
+    assign(:lists, [List.create!(
+      :name => "Name",
+      :description => "MyText"
+    ),
+                    List.create!(
+                      :name => "Name",
+                      :description => "MyText")
     ])
   end
 
